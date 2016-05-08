@@ -1,8 +1,7 @@
-// litebox
-// next features:
-// use "data-litebox" instead of "data-youtube-id" requires RegEx fun times
-// do other things in litebox: img, html, vimeo
-
+// litebox.js
+// A light-weight, dependency-free light box Javascript library library.
+// Author: Barrett Hafner
+// License: MIT
 
 ;(function() {
 
@@ -14,16 +13,17 @@
     // Document Event Listener
     //
     // adds an event listener to the entire body
-    // onclick traverses the DOM to looking any element on the event with data-youtube-id attribute
+    // onclick traverses the DOM to looking any element on the event with both an href and a data-litebox attribute
     // shows first one found in the lightbox
     document.addEventListener('click', function (event) {
 
       if (event.which === 1) { // left click
         var target = event.target;
         while (target) {
-          if (target.dataset.youtubeId) {
+          if (target.hasAttribute('href') && target.hasAttribute('data-litebox')) {
             event.preventDefault();
-            showVideo(target.dataset.youtubeId);
+            var youtubeId = getYoutubeIdFromUrl(target.getAttribute('href'));
+            showYoutube(youtubeId);
             return;
           } else if (target.parentElement) {
             target = target.parentElement;
@@ -95,7 +95,7 @@
     // showVideo
     // requires a youtube ID
 
-    function showVideo(youtubeID) {
+    function showYoutube(youtubeID) {
 
       // creat YouTube iframe template
       var iframe = '<iframe width="560" height="315" src="https://www.youtube.com/embed/{youtubeID}" frameborder="0" allowfullscreen></iframe>';
@@ -111,5 +111,17 @@
       liteboxOverlay.style.display = 'none';
       liteboxContent.innerHTML = '';
     }
+
+    function getYoutubeIdFromUrl(url) {
+
+      // shamelessly stolen from lity.js
+      // var rx = /(youtube(-nocookie)?\.com|youtu\.be)\/(watch\?v=|v\/|u\/|embed\/?)?([\w-]{11})(.*)?/i;
+
+      var rx = /^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/;
+      var id = url.match(rx)[1];
+      return id;
+      }
+
+
   }, false); // DOMContentLoaded event listener
 }()); // end of IIFE
