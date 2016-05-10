@@ -1,13 +1,41 @@
 // litebox.js
-// A light-weight, dependency-free light box Javascript library library.
+// A light-weight, dependency-free light box Javascript library for YouTube videos.
 // Author: Barrett Hafner
 // License: MIT
 
 ;(function() {
 
-  // wait for DOM content to load before you do anything
+  // not supported in all browsers
   document.addEventListener('DOMContentLoaded', function(){
 
+    //  -------------------------------------------------------------------
+    // Append css from litebox.css to head
+
+    var liteboxCSS = document.createElement("link");
+    liteboxCSS.href = "./litebox.css";
+    liteboxCSS.type = "text/css";
+    liteboxCSS.rel = "stylesheet";
+    document.getElementsByTagName("head")[0].appendChild(liteboxCSS);
+
+    //  -------------------------------------------------------------------
+    //    Append litebox html at the end of the body
+    //
+    //    <div id="litebox-overlay" style="display: none;">
+    //      <div id="litebox-content">
+    //      </div>
+    //      <span id="litebox-close"></span>
+    //    </div>
+
+    var htmlTemplate = '<div id="litebox-overlay" style="display: none;"><div id="litebox-content"></div><span id="litebox-close"></span></div>';
+
+    document.body.insertAdjacentHTML('beforeend', htmlTemplate);
+
+    //  -------------------------------------------------------------------
+    //  Get litebox html elements
+
+    var liteboxOverlay = document.querySelector('#litebox-overlay');
+    var liteboxContent = document.querySelector('#litebox-content');
+    var liteboxCloseButton = document.querySelector('#litebox-close');
 
     //  -------------------------------------------------------------------
     // Document Event Listener
@@ -37,36 +65,7 @@
     });
 
     //  -------------------------------------------------------------------
-    // Append css from litebox.css to head
-
-    var liteboxCSS = document.createElement("link");
-    liteboxCSS.href = "litebox.css";
-    liteboxCSS.type = "text/css";
-    liteboxCSS.rel = "stylesheet";
-    document.getElementsByTagName("head")[0].appendChild(liteboxCSS);
-
-    //  -------------------------------------------------------------------
-    //    Append litebox html at the end of the body
-    //
-    //    <div id="litebox-overlay" style="display: none;">
-    //      <div id="litebox-content">
-    //      </div>
-    //      <span id="litebox-close"></span>
-    //    </div>
-
-    var htmlTemplate = '<div id="litebox-overlay" style="display: none;"><div id="litebox-content"></div><span id="litebox-close"></span></div>';
-
-    document.body.insertAdjacentHTML('beforeend', htmlTemplate);
-
-    //  -------------------------------------------------------------------
-    //  Get litebox html elements
-
-    var liteboxOverlay = document.querySelector('#litebox-overlay');
-    var liteboxContent = document.querySelector('#litebox-content');
-    var liteboxCloseButton = document.querySelector('#litebox-close');
-
-    //  -------------------------------------------------------------------
-    //  Add event listeners
+    //  Other event listeners
 
     //  Hide litebox when liteboxContent is clicked
     //  liteboxContent fills the litebox
@@ -118,8 +117,8 @@
       // var rx = /(youtube(-nocookie)?\.com|youtu\.be)\/(watch\?v=|v\/|u\/|embed\/?)?([\w-]{11})(.*)?/i;
 
       var rx = /^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/;
-      var id = url.match(rx)[1];
-      return id;
+      return url.match(rx)[1];
+      
       }
 
 
