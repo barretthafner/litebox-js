@@ -12,7 +12,7 @@
     // Append css from litebox.css to head
 
     var liteboxCSS = document.createElement("link");
-    liteboxCSS.href = "./litebox.css";
+    liteboxCSS.href = "/css/litebox.css";
     liteboxCSS.type = "text/css";
     liteboxCSS.rel = "stylesheet";
     document.getElementsByTagName("head")[0].appendChild(liteboxCSS);
