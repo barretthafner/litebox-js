@@ -17,7 +17,7 @@ A light-weight, dependency-free light box Javascript library for YouTube videos.
     <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" data-litebox>Link</a>
 ```
 ## Demo
-  Checkout a demo page at:
+  Checkout a demo page at and supported YouTube link formats at:
   http://barretthafner.github.io/litebox-js/example.html
 
 ## Next Features
