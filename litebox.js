@@ -118,7 +118,7 @@
 
       var rx = /^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/;
       return url.match(rx)[1];
-      
+
       }
 
 
