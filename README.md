@@ -8,7 +8,9 @@ A light-weight, dependency-free light box Javascript library for YouTube videos.
     (the css and html requirements are injected automatically)
   * Using the script
     On any link pointing to a youtube video add the 'data-litebox' attribute, like so:
-        "<a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" data-litebox>Link</a>"
+        ```html
+        <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" data-litebox>Link</a>
+        ```
 ## Demo
 
 ## Next Features
